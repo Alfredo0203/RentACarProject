@@ -1,12 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - Rent a car 🚘 </title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -31,13 +36,24 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+
+        <footer style="background-color: #F6F5F5; border-radius:30px">
+            <br />
+            <br />
+            <div class="row">
+                <div class="text-center col-lg-12">
+                    <a href="https://es-la.facebook.com/"><i class="fab fa-3x fa-facebook fa-2x" style="color:blue"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-3x fa-instagram fa-2x" style="margin-left: 25px; color: #E1306C"></i></a>
+                    <a href="https://www.youtube.com/"><i class="fab fa-3x fa-youtube fa-2x" style="margin-left:25px; color:red"></i></a>
+                </div>
+            </div>
+            <br />
+            <p class="text-center">&copy; @DateTime.Now.Year - Rent a car</p>
+            <br />
+            <br />
         </footer>
+
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

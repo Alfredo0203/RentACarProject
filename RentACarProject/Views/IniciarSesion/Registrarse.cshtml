@@ -3,5 +3,81 @@
     ViewBag.Title = "Registrarse";
 }
 
-<h2>Registrarse</h2>
+@* NOTA: la parte que va comentada es para decidir de que manera se hará el foemulario, es decir, con HTMLForm o de la manera tradicional *@
 
+<div class="container-fluid">
+    <div class="row">
+
+            <br />
+            <center> <h2>Registrarse</h2> </center>
+            <br />
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center" style="background-color: #E3C4A8; border-radius: 15px">
+            <div style="align-items: center; justify-content: center; display: flex">
+
+                @using (Html.BeginForm())
+                {
+                    //ID oculto de usuario
+                    @*@Html.HiddenFor(x => x.Id)*@
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label"> Nombre </label>
+                        <input type="text"  class="form-control text-center"  value="" />
+                        @*@Html.TextBoxFor(x => x.Nombre, htmlAttributes: new { @class = "form-control text-center" })
+                        @Html.ValidationMessageFor(x => x.Nombre, null, htmlAttributes: new { @class = "text-danger" })*@
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Edad </label>
+                        <input type="number" class="form-control text-center" value="" />
+
+                        @*@Html.TextBoxFor(x => x.Edad, htmlAttributes: new { @class = "form-control text-center" })
+        @Html.ValidationMessageFor(x => x.Edad, null, htmlAttributes: new { @class = "text-danger" })*@
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Teléfono </label>
+                        <input type="number" class="form-control text-center" value="" />
+
+                        @*@Html.TextBoxFor(x => x.Telefono, htmlAttributes: new { @class = "form-control text-center" })
+        @Html.ValidationMessageFor(x => x.Telefono, null, htmlAttributes: new { @class = "text-danger" })*@
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Correo </label>
+                        <input type="email" class="form-control text-center" value="" />
+
+                        @*@Html.TextBoxFor(x => x.Correo, htmlAttributes: new { @class = "form-control text-center" })
+        @Html.ValidationMessageFor(x => x.Correo, null, htmlAttributes: new { @class = "text-danger" })*@
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Contraseña </label>
+                        <input type="password" class="form-control text-center" value="" />
+
+                        @*@Html.PasswordFor(x => x.Contra, htmlAttributes: new { @class = "form-control text-center" })
+        @Html.ValidationMessageFor(x => x.Contra, null, htmlAttributes: new { @class = "text-danger" })*@
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Confirmar contraseña </label>
+                        <input type="password" class="form-control text-center" value="" />
+
+                        @*@Html.PasswordFor(x => x.Confir, htmlAttributes: new { @class = "form-control text-center" })
+        @Html.ValidationMessageFor(x => x.Confir, null, htmlAttributes: new { @class = "text-danger" })*@
+                    </div>
+
+                    <br />
+                    <div class="form-group">
+                        <input class="btn" style="background-color: #33313B; color: #fff" type="submit" value="Registrarse" />
+                    </div>
+                    <br />
+                    <br />
+                }
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
