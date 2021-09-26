@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentACarProject", "RentACarProject\RentACarProject.csproj", "{01943B80-42B8-4EC2-8F6E-74D253188A13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{2920A201-48FB-46FD-B25D-1693EE5292C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAL", "BAL\BAL.csproj", "{660A402E-B382-4836-A453-9C45254E8E75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{01943B80-42B8-4EC2-8F6E-74D253188A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01943B80-42B8-4EC2-8F6E-74D253188A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01943B80-42B8-4EC2-8F6E-74D253188A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2920A201-48FB-46FD-B25D-1693EE5292C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2920A201-48FB-46FD-B25D-1693EE5292C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2920A201-48FB-46FD-B25D-1693EE5292C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2920A201-48FB-46FD-B25D-1693EE5292C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{660A402E-B382-4836-A453-9C45254E8E75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{660A402E-B382-4836-A453-9C45254E8E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{660A402E-B382-4836-A453-9C45254E8E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{660A402E-B382-4836-A453-9C45254E8E75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
