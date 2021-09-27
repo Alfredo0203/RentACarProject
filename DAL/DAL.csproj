@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Administradores.cs" />
     <Compile Include="Models\Autos.cs" />
     <Compile Include="Models\Carrito.cs" />
     <Compile Include="Models\Clientes.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Models\Modelos.cs" />
     <Compile Include="Models\Notificaciones.cs" />
     <Compile Include="Models\Proveedores.cs" />
+    <Compile Include="Models\Roles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

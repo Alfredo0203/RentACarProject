@@ -12,6 +12,7 @@ namespace DAL.Models
         {
         }
 
+        public virtual DbSet<Administradores> Administradores { get; set; }
         public virtual DbSet<Autos> Autos { get; set; }
         public virtual DbSet<Carrito> Carrito { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
@@ -26,6 +27,22 @@ namespace DAL.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Administradores>()
+                .Property(e => e.Nombre)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Administradores>()
+                .Property(e => e.Apellido)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Administradores>()
+                .Property(e => e.Correo)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Administradores>()
+                .Property(e => e.Contra)
+                .IsFixedLength();
             modelBuilder.Entity<Autos>()
                 .Property(e => e.Placa)
                 .IsFixedLength();
