@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IniciarSesionController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
@@ -148,6 +149,7 @@
     <Content Include="Content\Style\Card.css" />
     <Content Include="Content\Images\toyota.jpg" />
     <Content Include="Content\Style\carousel.css" />
+    <Content Include="Content\Style\DetalleAutos.css" />
     <Content Include="Content\Style\login.css" />
     <Content Include="Content\Style\navbar.css" />
     <Content Include="favicon.ico" />
@@ -186,6 +188,7 @@
     <Content Include="Views\IniciarSesion\Registrarse.cshtml" />
     <Content Include="Views\IniciarSesion\Autos.cshtml" />
     <Content Include="Views\Proveedores\MostrarProveedores.cshtml" />
+    <Content Include="Views\Autos\DetalleAutos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

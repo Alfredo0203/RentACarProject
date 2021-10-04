@@ -1,0 +1,23 @@
+﻿.detalleAutos{
+    margin-top: 100px;
+    text-align: center;
+}
+img {
+    width: 350px;
+    height: 350px;
+}
+.detalles {
+    padding-top: 30px;
+    width: 350px;
+    height: 350px;
+    color: #33313a;
+    background-color: #e3c4a8;
+    margin: 0 auto;
+}
+
+h2 {
+    margin: 0 auto;
+    background-color: #33313a;
+    width: 350px;
+    color: #e3c4a8;
+}
