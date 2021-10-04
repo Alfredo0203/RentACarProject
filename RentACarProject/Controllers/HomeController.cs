@@ -13,6 +13,10 @@ namespace RentACarProject.Controllers
         {
             return View();
         }
+        public ActionResult HistorialAlquiler()
+        {
+            return View();
+        }
         public ActionResult Contact()
         {
             return View();
