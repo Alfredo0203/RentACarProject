@@ -6,36 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Rent a car 🚘 </title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
-
-    @Styles.Render("~/Content/css")
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link href="~/Content/Style/navbar.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+
+    <div class="navigation-wrap start-header start-style">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-md navbar-light">
+
+                        <a class="nav-link navbar-brand" href="https://localhost:44372/Home/Index"><i style="font-size: 30px" class="fas fa-home"></i></a>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto py-4 py-md-0">
+
+
+                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Autos</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="https://localhost:44372/iniciarSesion/autos">Ver autos</a>
+                                        <a class="dropdown-item" href="">Categorías</a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link" href=""><i style="font-size:19px" class="fas fa-shopping-cart"></i></a>
+                                </li>
+
+                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Historial</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="">Alquiler</a>
+                                        <a class="dropdown-item" href="">Compras</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimiento</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="">Crud autos</a>
+                                        <a class="dropdown-item" href="">Crud compras</a>
+                                        <a class="dropdown-item" href="">Crud clientes</a>
+                                        <a class="dropdown-item" href="https://localhost:44372/Proveedores/MostrarProveedores">Crud proveedores</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link" href=""><i class="fas fa-bell"></i></a>
+                                </li>
+                                <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size:25px" class="fas fa-user-circle"></i></i></a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="">Salir</a>
+                                        <a class="dropdown-item" href="https://localhost:44372/IniciarSesion/IniciarSesion">Iniciar Sesión</a>
+                                        <a class="dropdown-item" href="https://localhost:44372/IniciarSesion/Registrarse">Registrarse</a>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+
+    <div class="body-content">
+
         @RenderBody()
-        <hr />
+
 
         <footer style="background-color: #F6F5F5; border-radius:30px">
             <br />
@@ -52,8 +100,10 @@
             <br />
             <br />
         </footer>
+        </div>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+        <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
 
-    </div>
-
+        <script src="~/Scripts/navbar.js"></script>
 </body>
 </html>
