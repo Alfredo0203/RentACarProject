@@ -153,6 +153,7 @@
     <Content Include="Content\Style\HistorialAlquiler.css" />
     <Content Include="Content\Style\login.css" />
     <Content Include="Content\Style\navbar.css" />
+    <Content Include="Content\Style\Notificacion.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
