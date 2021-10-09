@@ -192,6 +192,7 @@
     <Content Include="Views\Home\HistorialAlquiler.cshtml" />
     <Content Include="Views\Clientes\Registrarse.cshtml" />
     <Content Include="Views\Clientes\MostrarClientes.cshtml" />
+    <Content Include="Views\IniciarSesion\Carrito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
