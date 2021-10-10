@@ -9,12 +9,17 @@ namespace RentACarProject.Controllers
     public class AutosController : Controller
     {
         // GET: Autos
-        public ActionResult Index()
+        public ActionResult MostrarAutos()
         {
             return View();
         }
         // GET: DetalleAutos
         public ActionResult DetalleAutos()
+        {
+            return View();
+        }
+
+        public ActionResult AgregarOEditarAutos()
         {
             return View();
         }

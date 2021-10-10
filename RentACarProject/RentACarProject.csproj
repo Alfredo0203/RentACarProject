@@ -127,8 +127,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdministradoresController.cs" />
     <Compile Include="Controllers\AutosController.cs" />
+    <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\DetalleComprasController.cs" />
+    <Compile Include="Controllers\HistorialAlquilerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IniciarSesionController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
@@ -186,13 +190,17 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\IniciarSesion\IniciarSesion.cshtml" />
-    <Content Include="Views\IniciarSesion\Autos.cshtml" />
+    <Content Include="Views\Autos\MostrarAutos.cshtml" />
     <Content Include="Views\Proveedores\MostrarProveedores.cshtml" />
     <Content Include="Views\Autos\DetalleAutos.cshtml" />
-    <Content Include="Views\Home\HistorialAlquiler.cshtml" />
+    <Content Include="Views\HistorialAlquiler\HistorialAlquiler.cshtml" />
     <Content Include="Views\Clientes\Registrarse.cshtml" />
     <Content Include="Views\Clientes\MostrarClientes.cshtml" />
-    <Content Include="Views\IniciarSesion\Carrito.cshtml" />
+    <Content Include="Views\Carrito\Carrito.cshtml" />
+    <Content Include="Views\Administradores\MostrarAdministradores.cshtml" />
+    <Content Include="Views\DetalleCompras\DetalleCompras.cshtml" />
+    <Content Include="Views\Autos\AgregarOEditarAutos.cshtml" />
+    <Content Include="Views\Proveedores\AgregarOEditarProveedores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -22,12 +22,7 @@ namespace RentACarProject.Controllers
         {
             this.clientesRepository = new ClientesRepository(new Contexto());
         }
-        // GET: Clientes
-        public ActionResult Index()
-        {
 
-            return View();
-        }
         public ActionResult MostrarClientes()
         {
             var model = contexto.Clientes.ToList();

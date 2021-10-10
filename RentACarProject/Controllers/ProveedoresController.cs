@@ -13,5 +13,10 @@ namespace RentACarProject.Controllers
         {
             return View();
         }
+
+        public ActionResult AgregarOEditarProveedores()
+        {
+            return View();
+        }
     }
 }

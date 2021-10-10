@@ -18,15 +18,5 @@ namespace RentACarProject.Controllers
         {
             return View();
         }
-        public ActionResult Autos ()
-        {
-            return View();
-        }
-
-        public ActionResult Carrito()
-        {
-            return View();
-        }
-
     }
 }
