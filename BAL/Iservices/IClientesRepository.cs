@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BAL.Iservices
+namespace BAL.IServices
 {
     public interface IClientesRepository : IDisposable
     {

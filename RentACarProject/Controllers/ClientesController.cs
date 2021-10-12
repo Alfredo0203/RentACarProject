@@ -1,5 +1,5 @@
 ﻿
-using BAL.Iservices;
+using BAL.IServices;
 using BAL.Services;
 using DAL.Models;
 using System;

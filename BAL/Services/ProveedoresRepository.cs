@@ -4,29 +4,28 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace BAL.Services
 {
-    public class ClientesRepository : IClientesRepository, IDisposable
+    public class ProveedoresRepository : IProveedoresRepository, IDisposable
     {
 
         private readonly Contexto contexto;
 
-        public ClientesRepository(Contexto contexto_)
+        public ProveedoresRepository(Contexto contexto_)
         {
             this.contexto = contexto_;
         }
 
-        public bool AgregarEditar(Clientes model)
+        public bool CreateOrEdit(Proveedores model)
         {
-            bool hecho;
+            bool accion;
+
             try
             {
-                if (model.IdCliente > 0)
+                if (model.IdProveedor > 0)
                 {
                     contexto.Entry(model).State = EntityState.Modified;
                 }
@@ -36,51 +35,48 @@ namespace BAL.Services
                 }
 
                 contexto.SaveChanges();
-                hecho = true;
+                accion = true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine("Error", e);
-                hecho = false;
+                accion = false;
             }
-
-            return hecho;
+            return accion;
         }
 
 
-        public Clientes ObtenerId(int IdClien)
+        public Proveedores ObtenerId(int idProveedor)
         {
-            var model = contexto.Clientes.FirstOrDefault(x => x.IdCliente == IdClien);
+            var model = contexto.Proveedores.FirstOrDefault(x => x.IdProveedor == idProveedor);
 
             return model;
-        }
+        } 
 
-        public bool EliminarCliente(int IdClien)
+        public bool Delete(int idProveedor)
         {
-            bool hecho;
-            var model = ObtenerId(IdClien);
+            bool accion;
+            var model = ObtenerId(idProveedor);
+
             if (model != null)
             {
                 try
                 {
                     contexto.Entry(model).State = EntityState.Deleted;
-
                     contexto.SaveChanges();
-                    hecho = true;
+                    accion = true;
                 }
                 catch (Exception)
                 {
-
-                    hecho = false;
+                    accion = false;
                 }
             }
             else
             {
-                hecho = false;
+                accion = false;
             }
-
-            return hecho;
+            return accion;
         }
+
 
         public void Dispose()
         {
