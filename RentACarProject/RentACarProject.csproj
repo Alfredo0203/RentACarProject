@@ -200,7 +200,7 @@
     <Content Include="Views\Administradores\MostrarAdministradores.cshtml" />
     <Content Include="Views\DetalleCompras\DetalleCompras.cshtml" />
     <Content Include="Views\Autos\AgregarOEditarAutos.cshtml" />
-    <Content Include="Views\Proveedores\AgregarOEditarProveedores.cshtml" />
+    <Content Include="Views\Proveedores\AgregarOEditar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
