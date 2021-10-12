@@ -201,6 +201,7 @@
     <Content Include="Views\DetalleCompras\DetalleCompras.cshtml" />
     <Content Include="Views\Autos\AgregarOEditarAutos.cshtml" />
     <Content Include="Views\Proveedores\AgregarOEditarProveedores.cshtml" />
+    <Content Include="Views\Administradores\AddOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

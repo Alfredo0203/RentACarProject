@@ -1,0 +1,72 @@
+﻿@using DAL.Models;
+@model Administradores
+
+@{
+    ViewBag.Title = "Agregar o Modificar";
+}
+
+<br />
+<br />
+<br />
+<div class="container-fluid">
+    <center> <h2>Agregar o Editar</h2> </center>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center" style="background-color: #E3C4A8; border-radius: 15px">
+            <div style="align-items: center; justify-content: center; display: flex">
+
+                @using (Html.BeginForm())
+                {
+                    //ID oculto de usuario
+                    @Html.HiddenFor(x => x.IdAdministrador)
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label"> Nombre </label>
+                        @Html.TextBoxFor(x => x.Nombre, htmlAttributes: new { @class = "form-control text-center" })
+                        @Html.ValidationMessageFor(x => x.Nombre, null, htmlAttributes: new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Apellido </label>
+                        @Html.TextBoxFor(x => x.Apellido, htmlAttributes: new { @class = "form-control text-center" })
+                        @Html.ValidationMessageFor(x => x.Apellido, null, htmlAttributes: new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Edad </label>
+                        @Html.TextBoxFor(x => x.Edad, htmlAttributes: new { @class = "form-control text-center" })
+                        @Html.ValidationMessageFor(x => x.Edad, null, htmlAttributes: new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Teléfono </label>
+                        @Html.TextBoxFor(x => x.Telefono, htmlAttributes: new { @class = "form-control text-center" })
+                        @Html.ValidationMessageFor(x => x.Telefono, null, htmlAttributes: new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Correo </label>
+
+                        @Html.TextBoxFor(x => x.Correo, htmlAttributes: new { @class = "form-control text-center" })
+                        @Html.ValidationMessageFor(x => x.Correo, null, htmlAttributes: new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"> Contraseña </label>
+                        @Html.PasswordFor(x => x.Contra, htmlAttributes: new { @class = "form-control text-center" })
+                        @Html.ValidationMessageFor(x => x.Contra, null, htmlAttributes: new { @class = "text-danger" })
+                    </div>
+
+                    <br />
+                    <div class="form-group">
+                        <input class="btn" style="background-color: #33313B; color: #fff" type="submit" value="Registrarse" />
+                    </div>
+                    <br />
+                    <br />
+                }
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

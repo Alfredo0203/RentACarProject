@@ -1,7 +1,64 @@
-﻿
+﻿@using DAL.Models;
+@model List<Administradores>
 @{
-    ViewBag.Title = "MostrarAdministradores";
+    ViewBag.Title = "Mostrar Admin";
 }
+<center>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
 
-<h2>MostrarAdministradores</h2>
+                <br />
+                <center> <h2>Historial Administradores</h2> </center>
+
+                <button class="btn" onclick="window.location.href='/Administradores/AddOrEdit'" style="background-color: #080808; color: #fff; width: 70px"> <i class="fas fa-plus-circle"></i></button>
+                <br />
+                <br />
+
+                <table id="TablaClientes" class="table table-bordered table-striped table-hover table-responsive" style="border-width: 0px; text-align: center">
+                    <thead style="background-color: #080808; color: #fff">
+                        <tr>
+                            <td>ID</td>
+                            <td>Nombre</td>
+                            <td>Apellido</td>
+                            <td>Correo</td>
+                            <td>Contraseña</td>
+                            <td>Edad</td>
+                            <td>Telefono</td>
+                            <td>Rol</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.Count > 0)
+                        {
+                            foreach (var a in Model)
+                            {
+                                <tr>
+                                    <td>@a.IdAdministrador</td>
+                                    <td>@a.Nombre</td>
+                                    <td>@a.Apellido</td>
+                                    <td>@a.Correo</td>
+                                    <td>@a.Contra</td>
+                                    <td>@a.Edad</td>
+                                    <td>@a.Telefono</td>
+                                    <td>@a.Rol</td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="window.location.href = '/Administradores/AddOrEdit?IdAdmin='+@a.IdAdministrador" style="color: #000; width: 70px"> <i class="fas fa-edit"></i></button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" onclick="window.location.href = '/Administradores/EliminarAdmin?IdAdmin='+@a.IdAdministrador" style="color: #fff; width: 70px"> <i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    </center>
 
