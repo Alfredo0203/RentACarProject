@@ -1,0 +1,19 @@
+﻿
+#formulario {
+    background-color: #4592AF;
+    border-radius: 10px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+#button {
+    background-color: #33313B;
+    color: #fff;
+}
+
+.form-control {
+    width: 200px;
+}

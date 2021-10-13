@@ -1,0 +1,30 @@
+﻿/* Diseño de tabla */
+table {
+    border-width: 0px;
+    text-align: center;
+}
+
+        table thead {
+            background-color: #33313B !important;
+            color: #fff
+        }
+
+/* Tamaño de la pantalla */
+@media screen and (min-width: 480px) and (min-width: 1200px) {
+
+    table {
+        width: 900px !important;
+    }
+
+}
+
+/* Diseño de botones */
+
+.btn-default {
+    width: 85px;
+    text-align:center;
+}
+
+.btn-success, .btn-danger {
+    width: 60px;
+}
