@@ -21,6 +21,8 @@ namespace DAL.Models
         [StringLength(55)]
         public string NombreProveedor { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-8]{2})\)?[-.]?([0-8]{2})[-.]?[-.]?([0-8]{4})$", ErrorMessage = "Error, el número debe tener 8 digitos")]
         public int telefono { get; set; }
 
         [Required]

@@ -1,64 +1,67 @@
 ﻿@using DAL.Models;
 @model List<Clientes>
 @{
-    ViewBag.Title = "MostrarClientes";
+    ViewBag.Title = "Clientes";
 }
+
+@* Diseño *@
+<link href="~/Content/Style/TableAndButtons.css" rel="stylesheet" />
+<br />
+<br />
+<br />
+
 <center>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-
-                <br />
-                <center> <h2>Historial Clientes</h2> </center>
-
-                <button class="btn" onclick="window.location.href='/Clientes/Registrarse'" style="background-color: #080808; color: #fff; width: 70px"> <i class="fas fa-plus-circle"></i></button>
-                <br />
-                <br />
-
-                <table id="TablaClientes" class="table table-bordered table-striped table-hover table-responsive" style="border-width: 0px; text-align: center">
-                    <thead style="background-color: #080808; color: #fff">
-                        <tr>
-                            <td>ID</td>
-                            <td>Nombre</td>
-                            <td>Apellido</td>
-                            <td>Correo</td>
-                            <td>Contraseña</td>
-                            <td>Edad</td>
-                            <td>Telefono</td>
-                            <td>Estado</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @if (Model.Count > 0)
-                        {
-                            foreach (var c in Model)
-                            {
-                                <tr>
-                                    <td>@c.IdCliente</td>
-                                    <td>@c.NombreCliente</td>
-                                    <td>@c.Apellido</td>
-                                    <td>@c.Correo</td>
-                                    <td>@c.Contra</td>
-                                    <td>@c.Edad</td>
-                                    <td>@c.Telefono</td>
-                                    <td>@c.Estado</td>
-                                    <td>
-                                        <button class="btn btn-success" onclick="window.location.href = '/Clientes/Registrarse?IdClien='+@c.IdCliente" style="color: #000; width: 70px"> <i class="fas fa-edit"></i></button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger" onclick="window.location.href = '/Clientes/EliminarCliente?IdClien='+@c.IdCliente" style="color: #fff; width: 70px"> <i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
+    <h2>Clientes</h2>
+    <br />
+    <button class="btn btn-default" onclick="window.location.href='/Clientes/Registrarse'"> Agregar </button>
 </center>
+
+<br />
+
+<div class="container" style="display: flex; justify-content: center; align-items: center">
+
+    <div class="row text-center">
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Correo</td>
+                    <td>Contraseña</td>
+                    <td>Edad</td>
+                    <td>Telefono</td>
+                    <td>Estado</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Count > 0)
+                {
+                    foreach (var c in Model)
+                    {
+                        <tr>
+                            <td>@c.IdCliente</td>
+                            <td>@c.NombreCliente</td>
+                            <td>@c.Apellido</td>
+                            <td>@c.Correo</td>
+                            <td>@c.Contra</td>
+                            <td>@c.Edad</td>
+                            <td>@c.Telefono</td>
+                            <td>@c.Estado</td>
+                            <td>
+                                <button class="btn btn-success" onclick="window.location.href = '/Clientes/Registrarse?IdClien='+@c.IdCliente"> <i class="fas fa-edit"></i></button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" onclick="window.location.href = '/Clientes/EliminarCliente?IdClien='+@c.IdCliente"> <i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
