@@ -23,7 +23,7 @@
                 <div class="col-12">
                     <nav class="navbar navbar-expand-md navbar-light">
 
-                        <a class="nav-link navbar-brand" href="https://localhost:44372/Home/Index"><i style="font-size: 30px" class="fas fa-home"></i></a>
+                        @Html.ActionLink(" ", "Index", "Home", new { area = "" }, new { @class = "nav-link nav-brand fas fa-home", @style = "font-size:30px" })
 
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -34,9 +34,8 @@
 
 
                                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Autos</a>
+                                    @Html.ActionLink("Autos", "MostrarAutos", "Autos", new { area = "" }, new { @class = "nav-link dropdown-toggle" })
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="https://localhost:44372/Autos/MostrarAutos">Ver autos</a>
                                         <a class="dropdown-item" href="">Categorías</a>
                                     </div>
                                 </li>
@@ -56,6 +55,7 @@
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimiento</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="https://localhost:44372/Autos/MostrarAutos">Crud autos</a>
+                                        @Html.ActionLink("Marcas y Modelos", "GetMarcasModelos", "MarcasModelos", new { area = "" }, new { @class = "dropdown-item" })
                                         <a class="dropdown-item" href="https://localhost:44372/DetalleCompras/DetalleCompras">Crud compras</a>
                                         <a class="dropdown-item" href="https://localhost:44372/Clientes/MostrarClientes">Crud clientes</a>
                                         <a class="dropdown-item" href="https://localhost:44372/Administradores/MostrarAdministradores">Crud Administradores</a>
@@ -72,7 +72,7 @@
                                     </div>
                                 </li>
                                 <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size:25px" class="fas fa-user-circle"></i></i></a>
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size:25px" class="fas fa-user-circle"></i></a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="">Salir</a>
                                         <a class="dropdown-item" href="https://localhost:44372/IniciarSesion/IniciarSesion">Iniciar Sesión</a>
@@ -92,7 +92,7 @@
 
         @RenderBody()
 
-        
+
         <footer style="background-color: #F6F5F5; border-radius:30px">
             <br />
             <br />
@@ -129,5 +129,6 @@
         }
     </script>
 
+    @Scripts.Render("~/Scripts/MarcasModelos.js")
 </body>
 </html>
