@@ -51,6 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\202110120536353_InitialCreate.cs" />
+    <Compile Include="Migrations\202110120536353_InitialCreate.designer.cs">
+      <DependentUpon>202110120536353_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110162114038_Inicial.cs" />
+    <Compile Include="Migrations\202110162114038_Inicial.designer.cs">
+      <DependentUpon>202110162114038_Inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Administradores.cs" />
     <Compile Include="Models\Autos.cs" />
     <Compile Include="Models\Carrito.cs" />
@@ -66,7 +75,14 @@
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202110120536353_InitialCreate.resx">
+      <DependentUpon>202110120536353_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110162114038_Inicial.resx">
+      <DependentUpon>202110162114038_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
