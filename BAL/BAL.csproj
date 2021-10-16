@@ -44,12 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IServices\IAdministradoresRepository.cs" />
+    <Compile Include="IServices\IAutosRepository.cs" />
     <Compile Include="IServices\IClientesRepository.cs" />
     <Compile Include="IServices\IMarcasRepository.cs" />
     <Compile Include="IServices\IModelosRepository.cs" />
     <Compile Include="IServices\IProveedoresRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdministradoresRepository.cs" />
+    <Compile Include="Services\AutosRepository.cs" />
     <Compile Include="Services\ClientesRepository.cs" />
     <Compile Include="Services\MarcasRepository.cs" />
     <Compile Include="Services\ModelosRepository.cs" />

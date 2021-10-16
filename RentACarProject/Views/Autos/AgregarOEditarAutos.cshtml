@@ -1,7 +1,110 @@
-﻿
-@{
-    ViewBag.Title = "AgregarOEditarAutos";
+﻿@using DAL.Models;
+@model Autos
+
+@* Diseño *@
+<link href="~/Content/Style/FormAndButtons.css" rel="stylesheet" />
+
+<br />
+<br />
+<br />
+
+@if (Model.IdAuto > 0)
+{
+    <br />
+    <center> <h2>Editar auto</h2> </center>
+    <br />
+    ViewBag.Title = "Editar";
+}
+else
+{
+    ViewBag.Title = "Agregar";
+    <br />
+    <center> <h2>Agregar auto</h2> </center>
+    <br />
 }
 
-<h2>AgregarOEditarAutos</h2>
+<div class="container text-center" id="formulario">
 
+    @using (Html.BeginForm())
+    {
+        //Id auto oculto
+        @Html.HiddenFor(x => x.IdAuto)
+        <br />
+        <br />
+        @*<div class="form-group">
+            <label class="control-label"> Marca </label>
+            @Html.DropDownListFor(x => x.FkMarca, (IEnumerable<SelectListItem>)ViewBag.listaMarcas, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.FkMarca, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label class="control-label"> Modelo </label>
+            @Html.DropDownListFor(x => x.FKModelo, (IEnumerable<SelectListItem>)ViewBag.listaModelos, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.FKModelo, null, htmlAttributes: new { @class = "text-danger" })
+        </div>*@
+
+        <div class="form-group">
+            <label class="control-label"> Modelo: </label>
+            @Html.TextBoxFor(x => x.FkMarca, htmlAttributes: new { @class = "form-control text-center" })
+        </div> <div class="form-group">
+            <label class="control-label"> Marca: </label>
+            @Html.TextBoxFor(x => x.FkMarca, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.FkMarca, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label class="control-label"> Placa: </label>
+            @Html.TextBoxFor(x => x.Placa, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.Placa, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label"> Color: </label>
+            @Html.TextBoxFor(x => x.Color, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.Color, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label"> Precio por dia </label>
+            @Html.TextBoxFor(x => x.PrecioDia, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.PrecioDia, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label"> Categoria: </label>
+            @Html.PasswordFor(x => x.Categoria, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.Categoria, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label class="control-label"> Pasajeros: </label>
+            @Html.PasswordFor(x => x.Pasajeros, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.Pasajeros, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label class="control-label"> Numero de puestas: </label>
+            @Html.PasswordFor(x => x.NumeroPuertas, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.NumeroPuertas, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label class="control-label"> Imagen: </label>
+            @Html.PasswordFor(x => x.Imagen, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.Imagen, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label class="control-label"> Gif: </label>
+            @Html.PasswordFor(x => x.Gif, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.Gif, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label class="control-label"> Estado: </label>
+            @Html.PasswordFor(x => x.Estado, htmlAttributes: new { @class = "form-control text-center" })
+            @Html.ValidationMessageFor(x => x.Estado, null, htmlAttributes: new { @class = "text-danger" })
+        </div>
+
+        <br />
+        <div class="form-group">
+            <input class="btn" id="button" type="submit" value="Guardar" />
+        </div>
+        <br />
+        <br />
+    }
+
+</div>
