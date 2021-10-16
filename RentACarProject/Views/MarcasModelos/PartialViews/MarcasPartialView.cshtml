@@ -1,0 +1,55 @@
+﻿@using DAL.Models;
+@model  Marcas
+
+@{ 
+    var editar = ViewBag.editar;
+    var idLogo = ViewBag.IdLogo;
+}
+
+<div class="modal fade" id="ModalMarca" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            @using (Html.BeginForm("CrearMarca", "MarcasModelos", FormMethod.Post, new { enctype= "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()<div class="modal-header">
+                    @if (!editar)
+                    {
+                        <h2 class="modal-title text-primary text-center">Agregar marca de auto</h2>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    }
+                    else { 
+                        <h2 class="modal-title text-primary text-center">Editar marca de auto</h2>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    }
+                </div>
+                <div class="modal-body">
+                    @Html.HiddenFor(x => x.IdMarca)
+                    <div class="form-group text-left">
+                        <label class="control-label">Nombre de marca: </label>
+                        @Html.TextBoxFor(x => x.NombreMarca, new { @class="form-control", @required = "required" })
+                        @Html.ValidationMessageFor(x => x.NombreMarca, null, new { @class="text-danger"})
+                    </div>
+                    @if (editar)
+                    {
+                        <div class="form-group text-center">
+                            <img class="img-responsive img-rounded" src="@Url.Action("ConvertirImagen", "MarcasModelos", new { id = idLogo })" width="80" height="70" alt="Logo Marca" /><br /><br />
+                            <input type="file" name="file" />
+                            @Html.ValidationMessageFor(x => x.LogoMarca, null, new { @class = "text-danger" })
+                        </div>
+                    }
+                    else { 
+                        <div class="form-group">
+                            <label class="control-label">Logo de marca: </label>
+                            <input type="file" name="file" required/>
+                            @Html.ValidationMessageFor(x => x.LogoMarca, null, new { @class = "text-danger" })
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

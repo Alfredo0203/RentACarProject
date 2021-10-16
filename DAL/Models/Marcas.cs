@@ -19,8 +19,10 @@ namespace DAL.Models
         public int IdMarca { get; set; }
 
         [Required]
-        [StringLength(55)]
         public string NombreMarca { get; set; }
+
+        [Required(ErrorMessage ="Debe agregar una imagen")]
+        public byte[] LogoMarca { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Autos> Autos { get; set; }

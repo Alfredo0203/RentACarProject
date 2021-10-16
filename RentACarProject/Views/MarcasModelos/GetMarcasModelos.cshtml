@@ -1,0 +1,162 @@
+﻿@using DAL.Models;
+
+@{
+    ViewBag.Title = "Marcas y Modelos";
+    var marcasLista = ViewBag.MarcasLista;
+    var modelosLista = ViewBag.ModelosLista;
+    var ModeloEliminado = ViewBag.ModeloEliminado;
+    var MarcaEliminada = ViewBag.MarcaEliminada;
+}
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<br />
+<br />
+<br />
+
+<style>
+    .buttonsFilters {
+        margin-bottom: 25px;
+        margin-left: 10px;
+        margin-top: 35px;
+    }
+
+    .logo {
+        margin-top: 40px;
+    }
+
+    .CardMarcasModelos {
+        margin-top: 20px;
+        background-color: rgb(0 148 255);
+        color: black;
+        width: 400px;
+        padding: 10px;
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.377);
+        border-radius: 20px;
+    }
+
+    #btnEliminarMarca {
+        margin-left: 5px;
+    }
+
+    #btnEliminarModelo {
+        margin-left: 5px;
+    }
+
+    .main{
+        margin-bottom: 40px;
+    }
+</style>
+
+<div class="container-fluid text-center">
+    <header class="page-header">
+        <h2>Listado de marcas y modelos de automóviles</h2>
+    </header>
+</div>
+
+<div id="MarcasModal"></div>
+<div id="ModeloModal"></div>
+
+<div class="container text-center main">
+    <div class="row buttonsFilters">
+        <div class="text-left col-lg-4">
+            <button class="btn btn-primary" id="ModalMarca" data-toggle="ajax-modal" data-target="#ModalMarca" data-url="@Url.Action("CrearMarca", "MarcasModelos")">Agregar marca</button>
+            <button class="btn btn-success" id="ModalModelo" data-toggle="ajax-modal" data-target="#ModalModelo" data-url="@Url.Action("CrearModelo", "MarcasModelos")">Agregar modelo</button>
+        </div>
+        <div class="col-lg-8"></div>
+    </div>
+
+    <div class="row">
+        @if (marcasLista != null)
+        {
+            foreach (var marca in marcasLista)
+            {
+                <div class="col-lg-6 CardMarcasModelos">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col">
+                                <div class="contentBx logo">
+                                    <img class="img-responsive img-rounded" src="@Url.Action("ConvertirImagen", "MarcasModelos", new { id= marca.IdMarca })" width="80" height="70" alt="Logo Marca" />
+                                </div>
+                                <div class="card-body">
+                                    <h4 id="titleMarca" class="card-title">@marca.NombreMarca</h4>
+                                </div>
+                                <div class="col-lg-2" style="flex:auto; display:inline">
+                                    <button class="fas fa-edit" data-toggle="ajax-modal-EditMarca" data-target="#ModalMarca" data-url="@Url.Action("CrearMarca", "MarcasModelos", new { idMarca= marca.IdMarca})"></button>
+                                    <button id="EliminarMarca" class="fas fa-trash" onclick="EliminarMarca('+@marca.IdMarca+')"></button>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <article class="card modeloscard ">
+                                    <div class="card-header">
+                                        Modelos
+                                    </div>
+                                    @if (modelosLista != null)
+                                    {
+                                        foreach (var modelo in modelosLista)
+                                        {
+                                            if (modelo.FkMarca == marca.IdMarca)
+                                            {
+                                                <ul class="list-group list-group-flush text-left">
+                                                    <li class="list-group-item">
+                                                        @modelo.NombreModelo
+                                                        <button id="EliminarModelo" class="fas fa-trash float-right" onclick="EliminarModelo('+ @modelo.IdModelo +')"></button>
+                                                        <button class="fas fa-edit float-right" data-toggle="ajax-modal-EditModelo" data-url="@Url.Action("CrearModelo", "MarcasModelos", new { idModelo= modelo.IdModelo})"></button>
+                                                </ul>
+                                            }
+
+                                        }
+                                    }
+
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        
+    </div>
+</div>
+
+    @if (MarcaEliminada == true)
+    {
+        <script>
+            Swal.fire({
+                title: 'Eliminado',
+                text: 'Marca y modelos eliminados con éxito!',
+                icon: 'success',
+                toast: true,
+                timer: 5000,
+                timeProgressBar: true,
+                position: 'bottom-end',
+                allowOutsideClick: false,
+                allowEscapekey: false,
+                stopKeydownPropagation: false,
+                backdrop: false
+            })
+        </script>
+    }
+
+    @if (ModeloEliminado == true)
+    {
+        <script>
+            Swal.fire({
+                title: 'Eliminado',
+                text: 'Modelo eliminado con éxito!',
+                icon: 'success',
+                toast: true,
+                timer: 5000,
+                timeProgressBar: true,
+                position: 'bottom-end',
+                allowOutsideClick: false,
+                allowEscapekey: false,
+                stopKeydownPropagation: false,
+                backdrop: false
+            })
+        </script>
+    }
+
+
+
