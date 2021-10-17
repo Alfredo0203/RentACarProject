@@ -1,10 +1,8 @@
 ﻿using BAL.IServices;
 using BAL.Services;
 using DAL.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace RentACarProject.Controllers
@@ -12,17 +10,18 @@ namespace RentACarProject.Controllers
     public class AutosController : Controller
     {
         private IAutosRepository autosRepository;
-        private Contexto contexto;
+        private IMarcasRepository marcasRepository;
+        private IModelosRepository modelosRepository;
 
         public AutosController()
         {
             this.autosRepository = new AutosRepository(new Contexto());
+            this.marcasRepository = new MarcasRepository(new Contexto());
+            this.modelosRepository = new ModelosRepository(new Contexto());
         }
         // GET: Autos
         public ActionResult MostrarAutos()
         {
-            ViewBag.listaMarcas = SeleccionarMarca();
-            ViewBag.listaModelos = SeleccionarModelo();
             var autos = autosRepository.listarAutos();
             return View(autos);
         }
@@ -35,6 +34,10 @@ namespace RentACarProject.Controllers
             {
                 auto = autosRepository.ObtenerPorId(id);
             }
+
+            ViewBag.ListaMarcas = SeleccionarMarca();
+            ViewBag.ListaModelos = SeleccionarModelo();
+
             return View(auto);
         }
         //AGREGAR AUTOS
@@ -44,7 +47,11 @@ namespace RentACarProject.Controllers
             if (ModelState.IsValid)
             {
               autosRepository.EditarOAgregarAutos(a);
+              return RedirectToAction("MostrarAutos");
             }
+         
+            ViewBag.ListaMarcas = SeleccionarMarca();
+            ViewBag.ListaModelos = SeleccionarModelo();
             return View(a);
         }
         //ELIMINAR AUTO
@@ -59,23 +66,24 @@ namespace RentACarProject.Controllers
 
         public List<SelectListItem> SeleccionarMarca()
         {
-            var listaMarcas = new List<SelectListItem>();
-            var marcas = contexto.Marcas.ToList();
-            foreach (var i in  marcas)
+           var marcas = new List<SelectListItem>();
+           
+            foreach (var i in marcasRepository.ObtenerMarcas())
             {
-                listaMarcas.Add(new SelectListItem { Text = i.NombreMarca, Value = i.IdMarca.ToString() });
+                marcas.Add(new SelectListItem() { Text = i.NombreMarca, Value = i.IdMarca.ToString(), Selected = false });
             }
-            return listaMarcas;
+            return marcas;
         } 
         public List<SelectListItem> SeleccionarModelo()
         {
-            var listaModelos = new List<SelectListItem>();
-            var marcas = contexto.Modelos.ToList();
-            foreach (var i in  marcas)
+            List<SelectListItem> modelos = new List<SelectListItem>();
+
+            foreach (var i in modelosRepository.ObtenerModelos())
             {
-                listaModelos.Add(new SelectListItem { Text = i.NombreModelo, Value = i.IdModelo.ToString() });
+                modelos.Add(new SelectListItem() { Text = i.NombreModelo, Value = i.IdModelo.ToString(), Selected = false });
             }
-            return listaModelos;
+
+            return modelos;
         }
 
         // GET: DetalleAutos
