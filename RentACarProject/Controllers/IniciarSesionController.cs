@@ -25,12 +25,23 @@ namespace RentACarProject.Controllers
         public ActionResult IniciarSesion(string correo, string pass)
         {
             pass = Encriptado.EncryptPassword(pass);
-            var Info = contexto.Administradores.FirstOrDefault(x => x.Correo.Equals(correo) && x.Contra.Equals(pass));
-   
-                if (Info != null)
-                {
-                    Session["IdAdministrador"] = Info.IdAdministrador.ToString();
-                    return RedirectToAction("MostrarProveedores", "Proveedores");
+            var Admin = contexto.Administradores.FirstOrDefault(x => x.Correo.Equals(correo) && x.Contra.Equals(pass));
+            var Cliente = contexto.Clientes.FirstOrDefault(x => x.Correo.Equals(correo) && x.Contra.Equals(pass));
+
+            if (Admin != null)
+            {
+
+                Session["UserId"] = Admin.IdAdministrador.ToString();
+                Session["NombreAdmin"] = Admin.Nombre + " " + Admin.Apellido;
+                Session["UserRol"] = Admin.Rol.ToString();
+                return RedirectToAction("MostrarProveedores", "Proveedores");
+            }
+            else if (Cliente != null)
+            {
+                    Session["UserId"] = Cliente.IdCliente.ToString();
+                    Session["NombreUsuario"] = Cliente.NombreCliente;
+                    Session["UserRol"] = Cliente.Rol.ToString();
+                    return RedirectToAction("MostrarAutos", "Autos");
                 }
                 else
                 {

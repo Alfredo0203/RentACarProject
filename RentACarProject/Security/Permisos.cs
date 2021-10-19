@@ -14,38 +14,79 @@ namespace RentACarProject.Security
         {
             base.OnActionExecuting(filterContext);
 
-            var Id = System.Web.HttpContext.Current.Session["IdAdministrador"];
-            var id_string = "0";
+            var UserId = HttpContext.Current.Session["UserId"];
 
-            if (Id != null)
+            if (UserId == null)
             {
-                id_string = Id.ToString();
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
+                    new
+                    {
+                        controller = "Home",
+                        action = "Login"
+                    }
+                    ));
             }
-            if (!PermisoPorRol.IsAdmin(int.Parse(id_string)))
-            {
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
-                {
-                    controller = "Home",
-                    action = "Error"
-                }));
-            }
+
         }
+
+
     }
 
-    public class PermisoPorRol
+    public class Admin : ActionFilterAttribute
     {
-        public static bool IsAdmin(int idAdmin)
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (idAdmin <= 0)
+            base.OnActionExecuting(filterContext);
+
+
+            var RolUser = HttpContext.Current.Session["UserRol"];
+
+            using (Contexto db = new Contexto())
             {
-                return false;
-            }
-            using (var contexto = new Contexto())
-            {
-                var User = contexto.Administradores.FirstOrDefault(x => x.IdAdministrador == idAdmin);
-                return User.Rol == Roles.admin ? true : false;
+                if (RolUser.Equals("cliente"))
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
+                       new
+                       {
+                           controller = "Home",
+                           action = "Error"
+                       }
+                       ));
+
+                }
 
             }
         }
+
+    }
+
+    public class Cliente : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+
+            var RolUser = HttpContext.Current.Session["UserRol"];
+
+            using (Contexto db = new Contexto())
+            {
+
+                if (RolUser.Equals("administrador"))
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
+                       new
+                       {
+                           controller = "Home",
+                           action = "Error"
+                       }
+                       ));
+
+                }
+
+            }
+        }
+
     }
 }
+
+
