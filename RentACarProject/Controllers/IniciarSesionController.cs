@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using RentACarProject.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,9 @@ namespace RentACarProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult IniciarSesion(string correo, string pass)
         {
-
-                var Info = contexto.Administradores.FirstOrDefault(x => x.Correo.Equals(correo) && x.Contra.Equals(pass));
-
+            pass = Encriptado.EncryptPassword(pass);
+            var Info = contexto.Administradores.FirstOrDefault(x => x.Correo.Equals(correo) && x.Contra.Equals(pass));
+   
                 if (Info != null)
                 {
                     Session["IdAdministrador"] = Info.IdAdministrador.ToString();

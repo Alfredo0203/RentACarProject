@@ -1,6 +1,7 @@
 ﻿using BAL.IServices;
 using BAL.Services;
 using DAL.Models;
+using RentACarProject.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,10 +42,10 @@ namespace RentACarProject.Controllers
             [HttpPost]
             public ActionResult AddOrEdit(Administradores model)
             {
-
                 if (ModelState.IsValid)
                 {
-                    model.Rol = Roles.admin;
+                model.Contra= Encriptado.EncryptPassword(model.Contra);
+                model.Rol = Roles.admin;
                     var hecho = administradoresRepository.AgregarEditar(model);
                     if (hecho)
                     {

@@ -2,6 +2,7 @@
 using BAL.IServices;
 using BAL.Services;
 using DAL.Models;
+using RentACarProject.Security;
 using System;
 using System.Collections.Generic;
 
@@ -45,6 +46,7 @@ namespace RentACarProject.Controllers
 
             if (ModelState.IsValid)
             {
+                model.Contra = Encriptado.EncryptPassword(model.Contra);
                 model.Rol = Roles.cliente;
                 model.Estado = "Activo";
                 var hecho = clientesRepository.AgregarEditar(model);
