@@ -1,9 +1,12 @@
-﻿@{
+﻿@using DAL.Models;
+@model List<Autos>
+@{
     ViewBag.Title = "Autos";
 }
 
 @* Diseño *@
 <link href="~/Content/Style/Card.css" rel="stylesheet" />
+<link href="~/Content/Style/TableAndButtons.css" rel="stylesheet" />
 
 <br />
 <br />
@@ -88,3 +91,62 @@
 
     </div>
 </div>
+    @* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CRUD AUTOS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*@
+
+    <center>
+        <h2>Autos</h2>
+        <br />
+        <button class="btn btn-default" onclick="window.location.href='/Autos/AgregarOEditarAutos'"> Agregar </button>
+    </center>
+
+    <br />
+
+    <div class="container-fluid" style="display: flex; justify-content: center; align-items: center">
+
+        <div class="row text-center">
+
+            <table class="table table-bordered table-striped table-hover">
+
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>MARCA</td>
+                        <td>MODELO</td>
+                        <td>PLACA</td>
+                        <td>COLOR</td>
+                        <td>PRECIO POR DIA</td>
+                        <td>CATEGORIA</td>
+                        <td>PASAJEROS</td>
+                        <td>N° PUERTAS</td>
+                        <td>ESTADO</td>
+                        <td>ACCIONES</td>
+                    </tr>
+                </thead>
+               
+                <tbody>
+                    @if (Model.Count > 0)
+                    {
+                        foreach (var a in Model)
+                        {
+                            <tr>
+                                <td>@a.IdAuto</td>
+                                <td>@a.Marcas.NombreMarca</td>
+                                <td>@a.Modelos.NombreModelo</td>
+                                <td>@a.Placa</td>
+                                <td>@a.Color</td>
+                                <td>@a.PrecioDia</td>
+                                <td>@a.Pasajeros</td>
+                                <td>@a.NumeroPuertas</td>
+                                <td>@a.Categoria</td>
+                                <td>@a.Estado</td>
+                                <td style="display: flex;">
+                                    <button style="margin-right: 10px" class="btn btn-success" onclick="window.location.href = '/Autos/AgregarOEditarAutos?id='+@a.IdAuto"> <i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" onclick="window.location.href = '/Autos/EliminarAuto?id='+@a.IdAuto"> <i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
