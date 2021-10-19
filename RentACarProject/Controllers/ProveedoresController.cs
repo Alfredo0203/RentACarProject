@@ -1,6 +1,7 @@
 ﻿using BAL.IServices;
 using BAL.Services;
 using DAL.Models;
+using RentACarProject.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace RentACarProject.Controllers
 {
+    [Permisos]
     public class ProveedoresController : Controller
     {
 
