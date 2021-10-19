@@ -16,7 +16,7 @@
 @if (Session["UserRol"].Equals("cliente"))
 {
 <div style="display: flex; justify-content: center; align-items: center">
-    @if (Model.Count > 0)
+    @if (Model.Count() > 0)
     {
         foreach (var a in Model)
         {
@@ -37,7 +37,8 @@
                                     <span></span>
                                 </div>
                                 <br />
-                                <a href="https://localhost:44372/Autos/DetalleAutos">Ver detalles</a>
+                                @*@Html.ActionLink("Ver Detalles", "DetalleAutos", "Autos")*@
+                                <a class="btn" onclick="window.location.href='/Autos/DetalleAutos?IdAuto='+ @a.IdAuto">Ver detalles</a>
                             </div>
                         </div>
                     </div>

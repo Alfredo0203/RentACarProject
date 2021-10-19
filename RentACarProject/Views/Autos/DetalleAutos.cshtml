@@ -1,33 +1,59 @@
-﻿
+﻿@using DAL.Models;
+@model List<Autos>
 @{
     ViewBag.Title = "DetalleAutos";
+    var MiCarrito = ViewBag.ListaCarrito;
 }
+<style>
+    p {
+       margin-left:6rem;
+    }
+</style>
 <link href="~/Content/Style/DetalleAutos.css" rel="stylesheet" />
 <h2>DetalleAutos</h2>
+@if (Model.Count() > 0)
+{
+    foreach (var a in Model)
+    {
+        <div class="container detalleAutos">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="~/Content/Images/@a.Imagen" />
+                    <br />
+                    <br />
+                    @if (MiCarrito != null && MiCarrito.Contains(a.IdAuto))
+                    {
+                        <button class="btn btn-info" style="background-color: darkred; color:white" onclick="EliminarDelCarritoCarrito(@a.IdAuto)">Quitar del carrito</button>
+                    }
+                    else
+                    {
+                        <button onclick="GuardarEnCarrito('@a.IdAuto')" class="btn btn-info" style="background-color: #4592AF"><i class="fas fa-shopping-cart"></i>Agregar al carrito<i class="fas fa-shopping-cart" style="margin-left:7px"></i></button>
+                    }
+                    <br />
+                    <br />
+                </div>
+                <div class="col-lg-6">
+                    <h2 style="background-color: #33313a">@a.Marcas.NombreMarca @a.Modelos.NombreModelo</h2>
+                    <br style="height: 1px" />
+                    <div class="detalles text-left">
+                        <p></p>
+                        <p><b>N° Placa:</b> @a.Placa</p>
+                        <p><b>Precio por día: $</b> @a.PrecioDia</p>
+                        <p><b>Capacidad:</b> @a.Pasajeros pasajeros</p>
+                        <p><b>Categoría:</b> @a.Categoria</p>
+                        <p><b>Color:</b> @a.Color</p>
+                        <p><b>N° Puertas:</b> @a.NumeroPuertas</p>
+                        <p><b>Estado:</b> @a.Estado</p>
 
-<div class="container detalleAutos">
-    <div class="row">
-        <div class="col-lg-6">
-                <img src="~/Content/Images/toyota.jpg" />
-                <br />
-                <br />
-                <button class="btn btn-info"><i class="fas fa-shopping-cart"></i> Agregar al carrito</button>
-                <br />
-                <br />
-        </div>
-        <div class="col-lg-6">
-            <h2>JEEP</h2>
-            <br style="height: 1px" />
-            <div class="detalles">
-                <p></p>
-                <p>Precio por día: $ 0.25</p>
-                <p>Capacidad: 5 pasajeros</p>
-                <p>Categoría: camión</p>
-                <p>Año: 2023</p>
-                <p>Tracción: 4x2</p>
-                <p>Puertas: 2</p>
-
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    }
+}
+else
+{
+    <center><label class="text-danger">No hay información sobre este auto</label></center>
+}
+<script src="~/Scripts/EliminarCarrito.js"></script>
+<script src="~/Scripts/GuardarEnCarrito.js"></script>
