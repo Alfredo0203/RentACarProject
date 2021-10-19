@@ -1,46 +1,131 @@
 ﻿
+@using DAL.Models;
+@model List<Autos>
 @{
-    ViewBag.Title = "Carrito";
+    ViewBag.Title = "MostrarCarrito";
+    //Listado de productos en carrito del cliente logeado
+    var misAutos = ViewBag.ListaCarrito;
+    double TotalAPagar = 0.0f; // Variable quecalculará el precio total de los productos en carrito
+
 }
 
 <br />
 <br />
 <br />
 
-<div style="display: flex; justify-content: center; align-items: center;">
-    <div class="card text-center" style="width: 800px">
-        <div class="card-header" style="background-color: #33313B; color: #fff"> Marca </div>
-        <div class="card-body" style="background-color: #E3C4A8">
-            <div class="row">
-                <div class="col-md-6 col-sm-6">
-                    <img src="~/Content/Images/jeep.jpg" />
+
+@if (Model.Count() > 0)
+{
+<div class="containerCards cars" id="cards">
+
+    @foreach (var auto in Model)
+    {
+        //Recorre la lista de autos en carrito del cliente logeao
+        foreach (var carrito in misAutos)
+        {
+            //Condición para mostrar solamente los autos con el id igual al de de producto en Carrito del cliente logeado.
+            if (carrito.FkAuto == auto.IdAuto)
+            {
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <div class="card text-center" style="width: 800px">
+                        <div class="card-header" style="background-color: #33313B; color: #fff"> Marca </div>
+                        <div class="card-body" style="background-color: #E3C4A8">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <img src="~/Content/Images/jeep.jpg" />
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <p class="card-text">Precio por día: $ @auto.PrecioDia</p>
+                                    <p class="card-text">Precio total: $ @{ TotalAPagar = @carrito.CantidadDias * @auto.PrecioDia;}@TotalAPagar</p>
+                                    <p class="card-text">@auto.Estado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
-                    <p class="card-text">Precio por día: $</p>
-                    <p class="card-text">Precio total: $</p>
-                    <p class="card-text">Disponible</p>
+
+                <br />
+                <br />
+
+                <div class="row text-center">
+                    <div class="col-md-4" style="margin-bottom:25px">
+                        <button class="btn" style="background-color: #4592AF">Sacar del carrito<i class="fas fa-times" style="margin-left:10px; color: red"></i></button>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom:25px">
+                        <p class="card-text">Días</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom:25px">
+                        <button class="btn" style="background-color: #4592AF">Alquilar</button>
+                    </div>
+
                 </div>
-            </div>
-        </div>
+
+                @*Si la existencia del producto en Carrito es 0 No se mostrará el total, sino como agotado*@
+                if (auto.Estado.Equals("Agotado"))
+                {<label class="text-danger">Agotado</label> }
+                else
+                {
+                    <p>Precio total $ @{ TotalAPagar = @carrito.CantidadDias * @auto.PrecioDia;} </p>
+                }
+
+
+               
+
+                }
+            }
+        }
+
     </div>
-</div>
-
-<br />
-<br />
-
-<div class="row text-center">
-    <div class="col-md-4" style="margin-bottom:25px">
-        <button class="btn" style="background-color: #4592AF">Sacar del carrito<i class="fas fa-times" style="margin-left:10px; color: red"></i></button>
-    </div>
-    <div class="col-md-4" style="margin-bottom:25px">
-        <p class="card-text">Días</p>
-    </div>
-    <div class="col-md-4" style="margin-bottom:25px">
-        <button class="btn" style="background-color: #4592AF">Alquilar</button>
-    </div>
-
-</div>
 
 
+    @*---------------------------------------BOTÓN PARA COMPRAR------------------------------------------------------------*@
+    <center>
+        <h4 id="precio" style="color: #dc3545; display: none">Total: $ @TotalAPagar</h4>
 
+        <button class="btn btn-primary" id="btnComprar" style="display: none"
+                onclick="RealizarCompra()">
+            Realizar Compra
+        </button>
 
+    </center>
+}
+@*------------------------------------Mostrar BOTON SOLO CUANDO HAYA PRODUCTO EN CARRITO-----------------------------------------*@
+@if (TotalAPagar > 0)
+{
+    <script>
+        document.getElementById("btnComprar").style.display = "inline";
+        document.getElementById("precio").style.display = "block";
+    </script>
+}
+else
+{
+    <h2>No hay autos seleccionados</h2>
+    <center><h2 class="cajaCompra"><i class="fas fa-shopping-cart"></i></h2></center>
+    <script>document.getElementById("cards").style.display = "none"</script>
+}
+@*---------------------------------------FUNCIÓN PARA REALIZAR LA COMPRA------------------------------------------------------------*@
+<script>
+
+    function RealizarCompra() {
+        $.ajax({
+            url: '/Carrito/Vender',
+            type: 'POST',
+            async: true,
+            data: '',
+            success: function (resultado) {
+                if (resultado == true) {
+                    alertify.success('Compra realizada exitosamente');
+                    window.location.reload(true)
+                } else {
+                    alertify.success('No se pudo realizar Compra');
+                }
+            }
+
+        });
+
+    }
+
+</script>
+@*---------------------------------------------------------------------------------------------------------------------------------*@
+<script src="~/Scripts/PeticionesJQuerry/EditarCantidadCarrito.js"></script>
+<script src="~/Scripts/PeticionesJQuerry/SacarDelCarrito.js"></script>
