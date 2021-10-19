@@ -17,17 +17,21 @@ namespace DAL.Models
         [Key]
         public int IdProveedor { get; set; }
 
+
         [Required]
         [StringLength(55)]
         public string NombreProveedor { get; set; }
 
+
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-8]{2})\)?[-.]?([0-8]{2})[-.]?[-.]?([0-8]{4})$", ErrorMessage = "Error, el número debe tener 8 digitos")]
+        [RegularExpression(@"^\(?([6,7]{1})\)?[-.]?([0-9]{3})[-.]?[-.]?([0-9]{4})$", ErrorMessage = "El número debe tener 8 dígitos e iniciar con 7 ó 6")]
         public int telefono { get; set; }
+
 
         [Required]
         [StringLength(55)]
         public string direccion { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Compras> Compras { get; set; }

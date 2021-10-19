@@ -1,15 +1,21 @@
 ﻿@{
-    ViewBag.Title = "IniciarSesion";
+    ViewBag.Title = "Iniciar Sesion";
     Layout = null;
 }
 <link href="~/Content/Style/login.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
 
-<div class="login">
-    <i style="color:#33313B; font-size: 50px" class="fas fa-user"></i>
-    <input type="text" name="correo" value="" placeholder="Correo" />
-    <input type="text" name="passw" value="" placeholder="Contraseña" />
-    <input type="submit" value="Iniciar Sesión" />
-    <a href="">Registrarse</a>
-</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
+    <p style="color:#fff">@Html.ValidationSummary()</p>
+
+    <div class="login">
+        <i style="color:#33313B; font-size: 50px" class="fas fa-user"></i>
+        <input style="text-align:center" type="text" name="correo" value="" placeholder="Correo" required />
+        <input style="text-align:center" type="password" name="pass" value="" placeholder="Contraseña" required />
+        <input type="submit" value="Iniciar Sesión" />
+        <a href="">Registrarse</a>
+    </div>
+}
