@@ -12,7 +12,7 @@ namespace RentACarProject.Controllers
         private IAutosRepository autosRepository;
         private IMarcasRepository marcasRepository;
         private IModelosRepository modelosRepository;
-
+        Contexto contexto = new Contexto();
         public AutosController()
         {
             this.autosRepository = new AutosRepository(new Contexto());
@@ -23,6 +23,15 @@ namespace RentACarProject.Controllers
         public ActionResult MostrarAutos()
         {
             var autos = autosRepository.listarAutos();
+            int idCliente = ConvertirAEntero(Session["UserId"].ToString());
+            var autosEnCarrito = contexto.Carrito.Where(x => x.FkCliente == idCliente).ToList();
+            List<int> IdAutosEnCarrito = new List<int>(); // ---------------------------------- Esta lista almacenará los elementos en Carrito del cliente en sesión
+            foreach (var ids in autosEnCarrito) //---------------------------------------------- Se llena el la lista con los Ids productos en Carrito.
+            {
+                IdAutosEnCarrito.Add(ids.FkAuto);
+            }
+            Session["AutosEnCarrito"] = IdAutosEnCarrito; // --------------------------------- Asigna los Id de autos a la sesión
+            ViewBag.ListaCarrito = Session["AutosEnCarrito"];
             return View(autos);
         }
 
@@ -90,6 +99,12 @@ namespace RentACarProject.Controllers
         public ActionResult DetalleAutos()
         {
             return View();
+        }
+
+        public static int ConvertirAEntero(string id)
+        {
+            int clienteInt = int.Parse(id);
+            return clienteInt;
         }
     }
 }

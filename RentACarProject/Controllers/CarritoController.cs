@@ -25,9 +25,8 @@ namespace RentACarProject.Controllers
             //Manda la lista de inventario a la vista y  también la lista de producto de cliente por medio ViewBag(Para comparar y mostrar)
             try
             {
-                //int idCliente = ConvertirAEntero(Session["UserId"].ToString()); //Convierte el id del cliente en sesión a entero
-                //var autosEnCarrito = contexto.Carrito.Where(x => x.FkCliente == idCliente).ToList(); // Almacena listado de productos en carrito de acuerdo alcliente
-                var autosEnCarrito = contexto.Carrito.ToList();
+                int idCliente = ConvertirAEntero(Session["UserId"].ToString()); //Convierte el id del cliente en sesión a entero
+                var autosEnCarrito = contexto.Carrito.Where(x => x.FkCliente == idCliente).ToList(); // Almacena listado de productos en carrito de acuerdo alcliente
                 var inventario = contexto.Autos.ToList();
                 ViewBag.ListaCarrito = autosEnCarrito;
                 return View(inventario);
@@ -47,8 +46,8 @@ namespace RentACarProject.Controllers
             if (id > 0)
             {
                 int clienteInt = ConvertirAEntero(Session["UserId"].ToString());
-                bool ExisteEnCarrito = contexto.Carrito.Any(x => x.FkAuto == id && x.FkCliente == clienteInt);
-                if (ExisteEnCarrito) return Json("Ya existe", JsonRequestBehavior.AllowGet);
+                bool ExisteEnCarrito = contexto.Carrito.Any(x=> x.FkCliente == clienteInt);
+                if (ExisteEnCarrito) return Json(success, JsonRequestBehavior.AllowGet);
                 try
                 {  //Crea un objeto de la entidad carrito
                     Carrito elemento = new Carrito();

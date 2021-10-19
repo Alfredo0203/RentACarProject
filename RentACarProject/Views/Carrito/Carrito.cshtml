@@ -28,7 +28,7 @@
             {
                 <div style="display: flex; justify-content: center; align-items: center;">
                     <div class="card text-center" style="width: 800px">
-                        <div class="card-header" style="background-color: #33313B; color: #fff"> Marca </div>
+                        <div class="card-header" style="background-color: #33313B; color: #fff"> @auto.Marcas.NombreMarca @auto.Modelos.NombreModelo </div>
                         <div class="card-body" style="background-color: #E3C4A8">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
@@ -49,8 +49,8 @@
 
                 <div class="row text-center">
                     <div class="col-md-4" style="margin-bottom:25px">
-                        <button class="btn" style="background-color: #4592AF">Sacar del carrito<i class="fas fa-times" style="margin-left:10px; color: red"></i></button>
-                    </div>
+                        <button class="btn" onclick="EliminarDelCarritoCarrito(@auto.IdAuto)" style="background-color: darkred; color: white ">Sacar del carrito<i class="fas fa-times" style="margin-left:10px; color: red"></i></button>
+                     </div>
                     <div class="col-md-4" style="margin-bottom:25px">
                         <p class="card-text">Días</p>
                     </div>
@@ -128,4 +128,4 @@ else
 </script>
 @*---------------------------------------------------------------------------------------------------------------------------------*@
 <script src="~/Scripts/PeticionesJQuerry/EditarCantidadCarrito.js"></script>
-<script src="~/Scripts/PeticionesJQuerry/SacarDelCarrito.js"></script>
+<script src="~/Scripts/EliminarCarrito.js"></script>
