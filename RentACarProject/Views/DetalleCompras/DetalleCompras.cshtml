@@ -1,7 +1,49 @@
-﻿
+﻿@using DAL.Models;
+@model List<DetalleCompras>
+
 @{
-    ViewBag.Title = "DetalleCompras";
+    ViewBag.Title = "Detalle Compras";
 }
 
-<h2>DetalleCompras</h2>
+@* Diseño *@
+<link href="~/Content/Style/TableAndButtons.css" rel="stylesheet" />
+<br />
+<br />
+<br />
 
+<div class="container" style="display: flex; justify-content: center; align-items: center">
+
+    <div class="row text-center">
+
+        <table class="table table-bordered table-striped table-hover">
+
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Marca</td>
+                    <td>Modelo</td>
+                    <td>Precio Unitario</td>
+                    <td>Proveedor</td>
+                    <td>Fecha Compra</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Count > 0)
+                {
+                    foreach (var c in Model)
+                    {
+                <tr>
+                    <td>@c.IdDetalleCompra</td>
+                    <td>@c.Marca</td>
+                    <td>@c.Modelo</td>
+                    <td>@c.PrecioUnitario</td>
+                    <td>@c.Compras.Proveedores.NombreProveedor</td>
+                    <td>@c.Compras.Fecha</td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
