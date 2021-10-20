@@ -52,10 +52,10 @@
                         <button class="btn" onclick="EliminarDelCarritoCarrito(@auto.IdAuto)" style="background-color: darkred; color: white ">Sacar del carrito<i class="fas fa-times" style="margin-left:10px; color: red"></i></button>
                      </div>
                     <div class="col-md-4" style="margin-bottom:25px">
-                        <p class="card-text">Días</p>
+                        <p class="card-text">Días  <input onblur="EditarCantidad(@carrito.FkAuto)" type="number" min="1" id="cantidad" style="width:4rem" value="@carrito.CantidadDias"/></p>
                     </div>
                     <div class="col-md-4" style="margin-bottom:25px">
-                        <button class="btn" style="background-color: #4592AF">Alquilar</button>
+                        <button class="btn" style="background-color: #4592AF" onclick="RealizarPrestamo()">Alquilar</button>
                     </div>
 
                 </div>
@@ -103,21 +103,58 @@ else
     <center><h2 class="cajaCompra"><i class="fas fa-shopping-cart"></i></h2></center>
     <script>document.getElementById("cards").style.display = "none"</script>
 }
-@*---------------------------------------FUNCIÓN PARA REALIZAR LA COMPRA------------------------------------------------------------*@
-<script>
 
-    function RealizarCompra() {
+<script>
+    @* --------------------------------------- FUNCIÓN PARA EDITAR CANTIDAD DE DIAS------------------------------------------------------------*@
+    function EditarCantidad(id) {
+        var cantidad = document.getElementById("cantidad").value // Se optiene el valor del select y se almacena en cantidad
         $.ajax({
-            url: '/Carrito/Vender',
+            url: '/Carrito/EditarCantidad?id=' + id + '&cantidad=' + cantidad, // Se envía la petición alcontrolador con los dos parametros (id del auto y cantidad)
+            type: 'POST',
+            async: true,
+            data: '',
+
+        });
+    }
+    @* --------------------------------------- FUNCIÓN PARA REALIZAR el prestamo------------------------------------------------------------*@
+    function RealizarPrestamo() {
+        $.ajax({
+            url: '/Carrito/RealizarPrestamo',
             type: 'POST',
             async: true,
             data: '',
             success: function (resultado) {
                 if (resultado == true) {
-                    alertify.success('Compra realizada exitosamente');
-                    window.location.reload(true)
-                } else {
-                    alertify.success('No se pudo realizar Compra');
+                    Swal.fire({
+                        title: '¡Prestamo realizado exitosamente!',
+                        text: "Para devolverlo ve a la sección historial de prestamos",
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonPosition: 'center',
+                        confirmButtonColor: '#0067b8',
+                        timer: 9000,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload(true)
+                        }
+                    })
+
+                } else if (resultado == false) {
+                    Swal.fire({
+                        title: '¡No se pudo completar el prestamo!',
+                        text: "Es posible que su usuario este sansionado",
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonPosition: 'center',
+                        confirmButtonColor: '#0067b8',
+                        timer: 9000,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                        }
+
+                    })
+                    //FINALIZA EL DIALOGO E NOTIFICACIÓN
                 }
             }
 
