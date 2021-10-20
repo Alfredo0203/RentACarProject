@@ -90,18 +90,26 @@ namespace RentACarProject.Controllers
 
             string rolClienteString = Session["UserRol"].ToString(); // ------------------------------------------------------------------------------------------ Almacena nombre del rol en una variable
             int clienteInt = ConvertirAEntero(Session["UserId"].ToString()); // ------------------------------------------------------------- Convirte a entero y almacena id delcliente
-            var miProductoEnCarrito = contexto.Carrito.Where(x => x.FkCliente == clienteInt).ToList(); // -------------------------------------------------------- Obtiene listado de producto en carrito del cliente logeado
+            var miProducto = contexto.Carrito.FirstOrDefault(x => x.FkCliente == clienteInt); // -------------------------------------------------------- Obtiene listado de producto en carrito del cliente logeado
             var IdCliente = contexto.Clientes.FirstOrDefault(x => x.IdCliente == clienteInt && rolClienteString.Equals("cliente")).IdCliente; // -------------- Obtiene el id delcliente logeado
-           
-            //INICIO DE PROCESO PARA GUARDAR LOS PRODUCTOS DEL PEDIDO DELCLIENTE
-            foreach (var miProducto in miProductoEnCarrito)
-            {
-                var AutoEnInventario = contexto.Autos.FirstOrDefault(x => x.IdAuto == miProducto.FkAuto); // -------------------------------------------- De la tabla inventario Obtiene los datos del producto que tenía el cliente en carrito
-                if (AutoEnInventario.Estado == "Ocupado" && AutoEnInventario.IdAuto == miProducto.FkAuto) continue; // -------------------------------------- Omite (y salta la iteracción) en caso que no haya producto delque elcliente tiene en carrito
+            var AutoEnInventario = contexto.Autos.FirstOrDefault(x => x.IdAuto == miProducto.FkAuto); // -------------------------------------------- De la tabla inventario Obtiene los datos del producto que tenía el cliente en carrito
 
+            const string StringEstado = "Ocupado";
+            bool Ocupado = false;
+            if(AutoEnInventario.Estado.Trim() == StringEstado.Trim())
+            {
+                Ocupado = true;
+            }
+            //INICIO DE PROCESO PARA GUARDAR LOS PRODUCTOS DEL PEDIDO DELCLIENTE
+            if (Ocupado == true)
+            {
+                return Json(PrestamoFinalizado, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
                 // CAPTURAMOS LAS ESPECIFICACIONES DEL AUTO EN PROCESO DE COMPRA DE LA TABLA INVENTARIO
                 var Precio = contexto.Autos.FirstOrDefault(x => x.IdAuto == miProducto.FkAuto).PrecioDia;
-                var Marca = contexto.Autos.FirstOrDefault(x => x.IdAuto== miProducto.FkAuto).Marcas.NombreMarca;
+                var Marca = contexto.Autos.FirstOrDefault(x => x.IdAuto == miProducto.FkAuto).Marcas.NombreMarca;
                 var Modelo = contexto.Autos.FirstOrDefault(x => x.IdAuto == miProducto.FkAuto).Modelos.NombreModelo;
                 var nuevoPrestamo = new HistorialAlquiler(); // ------------------------------------------------------------------------------------------------------------------------ Crea nuevo objeto de la tabla ventas para generar la venta
                 nuevoPrestamo.FkCliente = IdCliente; // ------------------------------------------------------------------------------------------------------------------------ Se guarda el Id del cliente al que corresponde la venta
@@ -110,17 +118,19 @@ namespace RentACarProject.Controllers
                 nuevoPrestamo.CantidadDias = miProducto.CantidadDias;
                 nuevoPrestamo.PrecioTotal = Precio * miProducto.CantidadDias;
                 nuevoPrestamo.FechaInicio = DateTime.Now;
-        //Se saca el producto del carrito por medio del id del cliente y el id de auto
+                //Se saca el producto del carrito por medio del id del cliente y el id de auto
                 carritoRepository.EliminarDelCarrito(miProducto.FkAuto, clienteInt);
                 //Se llama la función para guardar los datos del objeto de detalleventas
                 contexto.Entry(nuevoPrestamo).State = EntityState.Added;
+                AutoEnInventario.Estado = StringEstado.Trim();
+                contexto.Entry(AutoEnInventario).State = EntityState.Modified;
                 //Se guardan los cambios en la base de datos
                 contexto.SaveChanges();
+
+                PrestamoFinalizado = true;
+
+                return Json(PrestamoFinalizado, JsonRequestBehavior.AllowGet);
             }
-            PrestamoFinalizado = true;
-
-
-            return Json(PrestamoFinalizado, JsonRequestBehavior.AllowGet);
         }
         // Recibe el id del auto y la cantidad 
         public JsonResult EditarCantidad(int id, int cantidad)

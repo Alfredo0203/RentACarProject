@@ -35,10 +35,11 @@
                                     <img src="~/Content/Images/jeep.jpg" />
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <p class="card-text">Precio por día: $ @auto.PrecioDia</p>
-                                    <p class="card-text">Precio total: $ @{ TotalAPagar = @carrito.CantidadDias * @auto.PrecioDia;}@TotalAPagar</p>
-                                    <p class="card-text">@auto.Estado</p>
-                                </div>
+                                    <p class="card-text"><b>Precio por día:</b> $ @auto.PrecioDia</p>
+                                    <p class="card-text"><b>Precio total:</b> $ @{ TotalAPagar = @carrito.CantidadDias * @auto.PrecioDia;}@TotalAPagar</p>
+                                    <p class="card-text"><b>Estado:</b> <b class="text-danger"> @auto.Estado</b>
+
+</div>
                             </div>
                         </div>
                     </div>
@@ -60,14 +61,7 @@
 
                 </div>
 
-                @*Si la existencia del producto en Carrito es 0 No se mostrará el total, sino como agotado*@
-                if (auto.Estado.Equals("Agotado"))
-                {<label class="text-danger">Agotado</label> }
-                else
-                {
-                    <p>Precio total $ @{ TotalAPagar = @carrito.CantidadDias * @auto.PrecioDia;} </p>
-                }
-
+               
 
                
 
@@ -78,16 +72,7 @@
     </div>
 
 
-    @*---------------------------------------BOTÓN PARA COMPRAR------------------------------------------------------------*@
-    <center>
-        <h4 id="precio" style="color: #dc3545; display: none">Total: $ @TotalAPagar</h4>
-
-        <button class="btn btn-primary" id="btnComprar" style="display: none"
-                onclick="RealizarCompra()">
-            Realizar Compra
-        </button>
-
-    </center>
+   
 }
 @*------------------------------------Mostrar BOTON SOLO CUANDO HAYA PRODUCTO EN CARRITO-----------------------------------------*@
 @if (TotalAPagar > 0)
@@ -114,7 +99,8 @@ else
             async: true,
             data: '',
 
-        });
+        })
+        window.location.reload(true)
     }
     @* --------------------------------------- FUNCIÓN PARA REALIZAR el prestamo------------------------------------------------------------*@
     function RealizarPrestamo() {
@@ -141,8 +127,8 @@ else
 
                 } else if (resultado == false) {
                     Swal.fire({
-                        title: '¡No se pudo completar el prestamo!',
-                        text: "Es posible que su usuario este sansionado",
+                        title: '¡Este auto no está disponible!',
+                        text: "Es posible que esté siendo utilizado por otro usuario",
                         icon: 'error',
                         confirmButtonText: 'OK',
                         confirmButtonPosition: 'center',
