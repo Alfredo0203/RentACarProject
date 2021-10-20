@@ -35,10 +35,11 @@
                                     <img src="~/Content/Images/jeep.jpg" />
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <p class="card-text">Precio por día: $ @auto.PrecioDia</p>
-                                    <p class="card-text">Precio total: $ @{ TotalAPagar = @carrito.CantidadDias * @auto.PrecioDia;}@TotalAPagar</p>
-                                    <p class="card-text">@auto.Estado</p>
-                                </div>
+                                    <p class="card-text"><b>Precio por día:</b> $ @auto.PrecioDia</p>
+                                    <p class="card-text"><b>Precio total:</b> $ @{ TotalAPagar = @carrito.CantidadDias * @auto.PrecioDia;}@TotalAPagar</p>
+                                    <p class="card-text"><b>Estado:</b> <b class="text-danger"> @auto.Estado</b>
+
+</div>
                             </div>
                         </div>
                     </div>
@@ -52,22 +53,15 @@
                         <button class="btn" onclick="EliminarDelCarritoCarrito(@auto.IdAuto)" style="background-color: darkred; color: white ">Sacar del carrito<i class="fas fa-times" style="margin-left:10px; color: red"></i></button>
                      </div>
                     <div class="col-md-4" style="margin-bottom:25px">
-                        <p class="card-text">Días</p>
+                        <p class="card-text">Días  <input onblur="EditarCantidad(@carrito.FkAuto)" type="number" min="1" id="cantidad" style="width:4rem" value="@carrito.CantidadDias"/></p>
                     </div>
                     <div class="col-md-4" style="margin-bottom:25px">
-                        <button class="btn" style="background-color: #4592AF">Alquilar</button>
+                        <button class="btn" style="background-color: #4592AF" onclick="RealizarPrestamo()">Alquilar</button>
                     </div>
 
                 </div>
 
-                @*Si la existencia del producto en Carrito es 0 No se mostrará el total, sino como agotado*@
-                if (auto.Estado.Equals("Agotado"))
-                {<label class="text-danger">Agotado</label> }
-                else
-                {
-                    <p>Precio total $ @{ TotalAPagar = @carrito.CantidadDias * @auto.PrecioDia;} </p>
-                }
-
+               
 
                
 
@@ -78,16 +72,7 @@
     </div>
 
 
-    @*---------------------------------------BOTÓN PARA COMPRAR------------------------------------------------------------*@
-    <center>
-        <h4 id="precio" style="color: #dc3545; display: none">Total: $ @TotalAPagar</h4>
-
-        <button class="btn btn-primary" id="btnComprar" style="display: none"
-                onclick="RealizarCompra()">
-            Realizar Compra
-        </button>
-
-    </center>
+   
 }
 @*------------------------------------Mostrar BOTON SOLO CUANDO HAYA PRODUCTO EN CARRITO-----------------------------------------*@
 @if (TotalAPagar > 0)
@@ -103,21 +88,59 @@ else
     <center><h2 class="cajaCompra"><i class="fas fa-shopping-cart"></i></h2></center>
     <script>document.getElementById("cards").style.display = "none"</script>
 }
-@*---------------------------------------FUNCIÓN PARA REALIZAR LA COMPRA------------------------------------------------------------*@
-<script>
 
-    function RealizarCompra() {
+<script>
+    @* --------------------------------------- FUNCIÓN PARA EDITAR CANTIDAD DE DIAS------------------------------------------------------------*@
+    function EditarCantidad(id) {
+        var cantidad = document.getElementById("cantidad").value // Se optiene el valor del select y se almacena en cantidad
         $.ajax({
-            url: '/Carrito/Vender',
+            url: '/Carrito/EditarCantidad?id=' + id + '&cantidad=' + cantidad, // Se envía la petición alcontrolador con los dos parametros (id del auto y cantidad)
+            type: 'POST',
+            async: true,
+            data: '',
+
+        })
+        window.location.reload(true)
+    }
+    @* --------------------------------------- FUNCIÓN PARA REALIZAR el prestamo------------------------------------------------------------*@
+    function RealizarPrestamo() {
+        $.ajax({
+            url: '/Carrito/RealizarPrestamo',
             type: 'POST',
             async: true,
             data: '',
             success: function (resultado) {
                 if (resultado == true) {
-                    alertify.success('Compra realizada exitosamente');
-                    window.location.reload(true)
-                } else {
-                    alertify.success('No se pudo realizar Compra');
+                    Swal.fire({
+                        title: '¡Prestamo realizado exitosamente!',
+                        text: "Para devolverlo ve a la sección historial de prestamos",
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonPosition: 'center',
+                        confirmButtonColor: '#0067b8',
+                        timer: 9000,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload(true)
+                        }
+                    })
+
+                } else if (resultado == false) {
+                    Swal.fire({
+                        title: '¡Este auto no está disponible!',
+                        text: "Es posible que esté siendo utilizado por otro usuario",
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonPosition: 'center',
+                        confirmButtonColor: '#0067b8',
+                        timer: 9000,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                        }
+
+                    })
+                    //FINALIZA EL DIALOGO E NOTIFICACIÓN
                 }
             }
 
