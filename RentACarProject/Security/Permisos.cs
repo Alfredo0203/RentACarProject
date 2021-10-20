@@ -21,8 +21,8 @@ namespace RentACarProject.Security
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
                     new
                     {
-                        controller = "Home",
-                        action = "Login"
+                        controller = "IniciarSesion",
+                        action = "IniciarSesion"
                     }
                     ));
             }

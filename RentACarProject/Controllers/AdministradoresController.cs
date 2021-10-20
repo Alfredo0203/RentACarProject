@@ -10,6 +10,8 @@ using System.Web.Mvc;
 
 namespace RentACarProject.Controllers
 {
+    [Permisos]
+    [Admin]
     public class AdministradoresController : Controller
     {
         // GET: Administradores

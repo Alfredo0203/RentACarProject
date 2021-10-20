@@ -1,12 +1,14 @@
 ﻿using BAL.IServices;
 using BAL.Services;
 using DAL.Models;
+using RentACarProject.Security;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace RentACarProject.Controllers
 {
+    [Permisos]
     public class AutosController : Controller
     {
         private IAutosRepository autosRepository;
@@ -36,6 +38,7 @@ namespace RentACarProject.Controllers
         }
 
         // GET: EDITAR AUTOS
+        [Admin]
         public ActionResult AgregarOEditarAutos(int id = 0)
         {
             var auto = new Autos();
@@ -50,6 +53,7 @@ namespace RentACarProject.Controllers
             return View(auto);
         }
         //AGREGAR AUTOS
+        [Admin]
         [HttpPost]
         public ActionResult AgregarOEditarAutos(Autos a)
         {
@@ -64,6 +68,7 @@ namespace RentACarProject.Controllers
             return View(a);
         }
         //ELIMINAR AUTO
+        [Admin]
         public ActionResult EliminarAuto(int id)
         {
             if (id>0)
@@ -96,6 +101,7 @@ namespace RentACarProject.Controllers
         }
 
         // GET: DetalleAutos
+        [Cliente]
         public ActionResult DetalleAutos(int IdAuto = 0)
         {
            

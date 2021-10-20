@@ -34,7 +34,7 @@ namespace RentACarProject.Controllers
                 Session["UserId"] = Admin.IdAdministrador.ToString();
                 Session["NombreAdmin"] = Admin.Nombre + " " + Admin.Apellido;
                 Session["UserRol"] = Admin.Rol.ToString();
-                return RedirectToAction("MostrarProveedores", "Proveedores");
+                return RedirectToAction("MostrarAutos", "Autos");
             }
             else if (Cliente != null)
             {

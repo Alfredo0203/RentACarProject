@@ -1,6 +1,7 @@
 ﻿using BAL.IServices;
 using BAL.Services;
 using DAL.Models;
+using RentACarProject.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +11,8 @@ using System.Web.Mvc;
 
 namespace RentACarProject.Controllers
 {
+    [Permisos]
+    [Cliente]
     public class CarritoController : Controller
     {
         private readonly ICarritoRepository carritoRepository;

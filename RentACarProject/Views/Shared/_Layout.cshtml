@@ -32,36 +32,43 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto py-4 py-md-0">
 
+                                @if (Session["UserRol"].Equals("cliente"))
+                                {
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        @Html.ActionLink("Autos", "MostrarAutos", "Autos", new { area = "" }, new { @class = "nav-link dropdown-toggle" })
 
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    @Html.ActionLink("Autos", "MostrarAutos", "Autos", new { area = "" }, new { @class = "nav-link dropdown-toggle" })
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="">Categorías</a>
-                                    </div>
-                                </li>
+                                    </li>
 
-                                <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link" href="https://localhost:44372/Carrito/Carrito"><i style="font-size:19px" class="fas fa-shopping-cart"></i></a>
-                                </li>
-
+                                    <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="https://localhost:44372/Carrito/Carrito"><i style="font-size:19px" class="fas fa-shopping-cart"></i></a>
+                                    </li>
+                                }
                                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Historial</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="https://localhost:44372/HistorialAlquiler/HistorialAlquiler">Alquiler</a>
-                                        <a class="dropdown-item" href="https://localhost:44372/DetalleCompras/DetalleCompras">Compras</a>
+                                        @if (Session["UserRol"] != null)
+                                        {
+                                            <a class="dropdown-item" href="https://localhost:44372/HistorialAlquiler/HistorialAlquiler">Alquiler</a>
+                                        }
+                                        @if (Session["UserRol"].Equals("admin"))
+                                        {
+                                            <a class="dropdown-item" href="https://localhost:44372/DetalleCompras/DetalleCompras">Compras</a>
+                                        }
                                     </div>
                                 </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimiento</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="https://localhost:44372/Autos/MostrarAutos">Crud autos</a>
-                                        @Html.ActionLink("Marcas y Modelos", "GetMarcasModelos", "MarcasModelos", new { area = "" }, new { @class = "dropdown-item" })
-                                        <a class="dropdown-item" href="https://localhost:44372/DetalleCompras/DetalleCompras">Crud compras</a>
-                                        <a class="dropdown-item" href="https://localhost:44372/Clientes/MostrarClientes">Crud clientes</a>
-                                        <a class="dropdown-item" href="https://localhost:44372/Administradores/MostrarAdministradores">Crud Administradores</a>
-                                        <a class="dropdown-item" href="https://localhost:44372/Proveedores/MostrarProveedores">Crud proveedores</a>
-                                    </div>
-                                </li>
+                                @if (Session["UserRol"].Equals("admin"))
+                                {
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimiento</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="https://localhost:44372/Autos/MostrarAutos">Crud autos</a>
+                                            @Html.ActionLink("Marcas y Modelos", "GetMarcasModelos", "MarcasModelos", new { area = "" }, new { @class = "dropdown-item" })
+                                            <a class="dropdown-item" href="https://localhost:44372/Clientes/MostrarClientes">Crud clientes</a>
+                                            <a class="dropdown-item" href="https://localhost:44372/Administradores/MostrarAdministradores">Crud Administradores</a>
+                                            <a class="dropdown-item" href="https://localhost:44372/Proveedores/MostrarProveedores">Crud proveedores</a>
+                                        </div>
+                                    </li>
+                                }
                                 <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
                                     <a class="nav-link" href=""><i class="fas fa-bell"></i></a>
                                     <div class="dropdown-menu notification">
@@ -74,10 +81,16 @@
                                 <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size:25px" class="fas fa-user-circle"></i></a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="https://localhost:44372/IniciarSesion/LogOut">Salir</a>
-                                        <a class="dropdown-item" href="https://localhost:44372/IniciarSesion/IniciarSesion">Iniciar Sesión</a>
-                                        <a class="dropdown-item" href="https://localhost:44372/Clientes/Registrarse">Registrarse</a>
-                                    </div>
+                                        @if (Session["UserId"] != null)
+                                        {
+                                            <a class="dropdown-item" href="https://localhost:44372/IniciarSesion/LogOut">Salir</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="dropdown-item" href="https://localhost:44372/IniciarSesion/IniciarSesion">Iniciar Sesión</a>
+                                            <a class="dropdown-item" href="https://localhost:44372/Clientes/Registrarse">Registrarse</a>
+                                        }
+                                        </div>
                                 </li>
 
                             </ul>

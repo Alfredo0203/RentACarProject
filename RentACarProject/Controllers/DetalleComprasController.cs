@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using RentACarProject.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,6 +9,8 @@ using System.Web.Mvc;
 
 namespace RentACarProject.Controllers
 {
+    [Permisos]
+    [Admin]
     public class DetalleComprasController : Controller
     {
 

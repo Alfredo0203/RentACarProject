@@ -11,9 +11,12 @@ using System.Drawing.Imaging;
 using System.Data.Entity;
 using BAL.Services;
 using BAL.IServices;
+using RentACarProject.Security;
 
 namespace RentACarProject.Controllers
 {
+    [Permisos]
+    [Admin]
     public class MarcasModelosController : Controller
     {
         private IMarcasRepository marcasRepository;

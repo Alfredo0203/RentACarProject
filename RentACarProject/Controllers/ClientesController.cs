@@ -13,6 +13,8 @@ using System.Web.Mvc;
 
 namespace RentACarProject.Controllers
 {
+    [Permisos]
+    [Admin]
     public class ClientesController : Controller
     {
         Contexto contexto = new Contexto();
@@ -47,6 +49,7 @@ namespace RentACarProject.Controllers
             if (ModelState.IsValid)
             {
                 model.Contra = Encriptado.EncryptPassword(model.Contra);
+                model.ConfirmarPass = Encriptado.EncryptPassword(model.ConfirmarPass);
                 model.Rol = Roles.cliente;
                 model.Estado = "Activo";
                 var hecho = clientesRepository.AgregarEditar(model);
