@@ -141,6 +141,21 @@ else
 
                     })
                     //FINALIZA EL DIALOGO E NOTIFICACIÓN
+                } else if (resultado == 'si') {
+                    Swal.fire({
+                        title: '¡No se puede prestar si no ha de vuelto todos los autos prestados!',
+                        text: "Vaya a la sesión de historial Alquiler y devuelve los autos",
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonPosition: 'center',
+                        confirmButtonColor: '#0067b8',
+                        timer: 9000,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                        }
+
+                    })
                 }
             }
 

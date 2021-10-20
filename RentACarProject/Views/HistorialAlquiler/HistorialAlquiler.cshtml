@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Historial Alquiler";
+    int contador = 1;
 }
 
 @* Diseño *@
@@ -20,6 +21,8 @@
             <thead>
                 <tr>
                     <td>ID</td>
+                    <td>Marca</td>
+                    <td>Modelo</td>
                     <td>Cliente</td>
                     <td>Placa</td>
                     <td>Fecha inicial</td>
@@ -34,19 +37,25 @@
             <tbody>
                 @if (Model.Count > 0)
                 {
-                    foreach (var h in Model)
+                    foreach (var h in Model.OrderByDescending(x=> x.IdHistorial))
                     {
                 <tr>
                     <td>@h.IdHistorial</td>
+                    <td>@h.Autos.Marcas.NombreMarca</td>
+                    <td>@h.Autos.Modelos.NombreModelo</td>
                     <td>@h.Clientes.NombreCliente</td>
                     <td>@h.Autos.Placa</td>
                     <td>@h.FechaInicio</td>
                     <td>@h.FechaEntrega</td>
                     <td>@h.CantidadDias</td>
                     <td>@h.Averiado</td>
-                    <td>@h.PrecioTotal</td>
+                    <td>$ @h.PrecioTotal</td>
                     <td>
-                        <button class="btn btn-secondary" onclick="window.location.href = "> <i class="fas fa-undo-alt"></i> </button>
+                        @if (h.Autos.Estado.Trim() == "Ocupado" && contador == 1)
+                        {
+                            <button class="btn btn-secondary" onclick="Devolver(@h.FkAuto)"> <i class="fas fa-undo-alt"></i> </button>
+                        }
+                        @{contador++;}
                     </td>
                 </tr>
                     }
@@ -55,3 +64,16 @@
         </table>
     </div>
 </div>
+
+<script>
+
+    function Devolver(id) {
+        $.ajax({
+            url: '/HistorialAlquiler/Devolver?id=' + id, // Se envía la petición alcontrolador con los dos parametros (id del auto y cantidad)
+            type: 'POST',
+            async: true,
+            data: '',
+        });
+        window.location.reload(true)
+    }
+</script>

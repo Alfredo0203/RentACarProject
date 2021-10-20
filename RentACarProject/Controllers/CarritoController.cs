@@ -90,16 +90,21 @@ namespace RentACarProject.Controllers
         public JsonResult RealizarPrestamo()
         {
             bool PrestamoFinalizado = false;
-
+            const string StringEstado = "Ocupado";
             string rolClienteString = Session["UserRol"].ToString(); // ------------------------------------------------------------------------------------------ Almacena nombre del rol en una variable
             int clienteInt = ConvertirAEntero(Session["UserId"].ToString()); // ------------------------------------------------------------- Convirte a entero y almacena id delcliente
             var miProducto = contexto.Carrito.FirstOrDefault(x => x.FkCliente == clienteInt); // -------------------------------------------------------- Obtiene listado de producto en carrito del cliente logeado
             var IdCliente = contexto.Clientes.FirstOrDefault(x => x.IdCliente == clienteInt && rolClienteString.Equals("cliente")).IdCliente; // -------------- Obtiene el id delcliente logeado
             var AutoEnInventario = contexto.Autos.FirstOrDefault(x => x.IdAuto == miProducto.FkAuto); // -------------------------------------------- De la tabla inventario Obtiene los datos del producto que tenía el cliente en carrito
-
-            const string StringEstado = "Ocupado";
+            //const string SinDevolver = "si";
+            var SinDevolver = contexto.HistorialAlquiler.FirstOrDefault(x => x.FkCliente == clienteInt && x.Autos.Estado.Trim() == StringEstado.Trim());
+           
             bool Ocupado = false;
-            if(AutoEnInventario.Estado.Trim() == StringEstado.Trim())
+            if (SinDevolver != null)
+            {
+                return Json("si", JsonRequestBehavior.AllowGet);
+            }
+               else if (AutoEnInventario.Estado.Trim() == StringEstado.Trim())
             {
                 Ocupado = true;
             }
@@ -114,9 +119,8 @@ namespace RentACarProject.Controllers
                 var Precio = contexto.Autos.FirstOrDefault(x => x.IdAuto == miProducto.FkAuto).PrecioDia;
                 var Marca = contexto.Autos.FirstOrDefault(x => x.IdAuto == miProducto.FkAuto).Marcas.NombreMarca;
                 var Modelo = contexto.Autos.FirstOrDefault(x => x.IdAuto == miProducto.FkAuto).Modelos.NombreModelo;
-                var nuevoPrestamo = new HistorialAlquiler(); // ------------------------------------------------------------------------------------------------------------------------ Crea nuevo objeto de la tabla ventas para generar la venta
-                nuevoPrestamo.FkCliente = IdCliente; // ------------------------------------------------------------------------------------------------------------------------ Se guarda el Id del cliente al que corresponde la venta
-                //ASIGNACÍÓN DE LOS DATOS AL OBJETO DE LA TABLA DETALLEVENTAS
+                var nuevoPrestamo = new HistorialAlquiler(); 
+                nuevoPrestamo.FkCliente = IdCliente;  
                 nuevoPrestamo.FkAuto = miProducto.FkAuto;
                 nuevoPrestamo.CantidadDias = miProducto.CantidadDias;
                 nuevoPrestamo.PrecioTotal = Precio * miProducto.CantidadDias;

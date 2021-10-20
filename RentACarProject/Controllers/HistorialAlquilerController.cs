@@ -34,6 +34,28 @@ namespace RentACarProject.Controllers
             }
         }
 
+        public JsonResult Devolver(int id= 0)
+        {
+            bool success = false;
+            if(id >0)
+            {
+                var model = contexto.Autos.FirstOrDefault(x => x.IdAuto == id);
+                const string StringEstado = "Ocupado";
+                const string StringEstado2 = "Disponible";
+                if (model.Estado.Trim() == StringEstado.Trim())
+                {
+                    model.Estado = StringEstado2.Trim();
+                    contexto.Entry(model).State = EntityState.Modified;
+                    contexto.SaveChanges();
+                    success = true;
+                    return Json(success, JsonRequestBehavior.AllowGet);
+                }
+            } 
+            
+                return Json(success, JsonRequestBehavior.AllowGet);
+           
+        }
+
         public static int ConvertirAEntero(string id)
         {
             int clienteInt = int.Parse(id);
